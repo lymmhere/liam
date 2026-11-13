@@ -1,5 +1,5 @@
 {
-  "name": "@lymmhere/liam",
+  "name": "@liamcuy/liam",
   "type": "module",
   "version": "1.0.0",
   "description": "Liam - a custom WhatsApp Web API fork of Baileys. Drop-in for bot scripts: CJS + ESM, legacy buttons/list, in-memory store.",
