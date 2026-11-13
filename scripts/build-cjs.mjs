@@ -1,23 +1,22 @@
-// Bundles src/ into a single CommonJS file so `require('@lymmhere/liam')` works on every Node >= 20,
-// without relying on require(esm). Dependencies stay external (installed from package.json).
-import { build } from 'esbuild'
 import { mkdirSync, writeFileSync } from 'node:fs'
 
 mkdirSync('cjs', { recursive: true })
 
-await build({
-	entryPoints: ['src/index.ts'],
-	outfile: 'cjs/index.cjs',
-	bundle: true,
-	platform: 'node',
-	format: 'cjs',
-	target: 'node20',
-	packages: 'external',
-	sourcemap: true,
-	logLevel: 'info'
-})
-
-// esbuild's CJS output puts everything on module.exports; make `require(...).default` and the
-// named export both point to makeWASocket, the way old Baileys behaved.
+writeFileSync(
+	'cjs/index.cjs',
+	`'use strict'
+try {
+	module.exports = require('../lib/index.js')
+} catch (err) {
+	if (err && (err.code === 'ERR_REQUIRE_ESM' || err.code === 'ERR_REQUIRE_ASYNC_MODULE')) {
+		throw new Error(
+			'Liam needs Node.js >= 20.19 or >= 22.12 to be loaded with require() (you have ' + process.version + '). ' +
+				'Upgrade Node, or load it with: await import("@lymmhere/liam")'
+		)
+	}
+	throw err
+}
+`
+)
 writeFileSync('cjs/package.json', JSON.stringify({ type: 'commonjs' }) + '\n')
-console.log('cjs build ok')
+console.log('cjs shim ok')
