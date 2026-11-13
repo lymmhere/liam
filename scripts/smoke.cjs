@@ -4,7 +4,7 @@ const need = [
 	'makeWASocket', 'default', 'makeCacheableSignalKeyStore', 'downloadContentFromMessage', 'generateWAMessageFromContent',
 	'generateWAMessage', 'generateWAMessageContent', 'generateForwardMessageContent', 'prepareWAMessageMedia',
 	'useMultiFileAuthState', 'useSingleFileAuthState', 'makeInMemoryStore', 'fetchLatestBaileysVersion',
-	'fetchLatestWaWebVersion', 'MessageType', 'proto', 'Browsers', 'getContentType', 'DisconnectReason',
+	'fetchLatestWaWebVersion', 'proto', 'Browsers', 'getContentType', 'DisconnectReason',
 	'areJidsSameUser', 'InteractiveMessage', 'WA_DEFAULT_EPHEMERAL', 'jidDecode', 'jidNormalizedUser', 'delay',
 	'extractMessageContent', 'getDevice', 'generateMessageIDV2', 'getAggregateVotesInPollMessage'
 ]
